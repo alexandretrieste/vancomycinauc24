@@ -8,41 +8,41 @@
 </head>
 <body>
     <div class="container">
-        <h1>Vancomycin AUC24 Calculator</h1>
+        <h1>Vancomycin AUC<sub>24</sub> Calculator</h1>
         <p>The critical assumption of these calculations is that the patient has achieved Vancomycin steady-state</p>
-        <p><span style="color:red;">Target AUC24 is 400-600 μg/mL x hr</span></p>
+        <p><span style="color:red;">Target AUC<sub>24</sub> is 400-600 μg/mL x hr</span></p>
         <div id="inputs">
-            <h2>Inputs</h2>
-            <label for="dose">Each Dose (mg): </label>
-            <input type="number" id="dose" name="dose"><br>
-            <label for="tau">Tau (hours): </label>
-            <input type="number" id="tau" name="tau"><br>
-            <label for="tinf">Tinf (hours): </label>
-            <input type="number" id="tinf" name="tinf"><br>
-            <label for="peak">Measured Peak (μg/mL): </label>
-            <input type="number" id="peak" name="peak"><br>
-            <label for="t1">T1 (hours): </label>
-            <input type="number" id="t1" name="t1"><br>
-            <label for="trough">Measured Trough (μg/mL): </label>
-            <input type="number" id="trough" name="trough"><br>
-            <label for="t2">T2 (hours): </label>
-            <input type="number" id="t2" name="t2"><br>
-            <button onclick="calculate()">Calculate</button>
+            <h2 id="inputsHeader">Inputs</h2>
+            <label for="dose" id="eachDoseLabel">Each Dose (mg): </label>
+            <input type="number" id="dose" name="dose" placeholder="Enter each dose in mg"><br>
+            <label for="tau" id="intervalLabel">Interval interval (Tau (hours)): </label>
+            <input type="number" id="tau" name="tau" placeholder="Enter interval between doses in hours"><br>
+            <label for="tinf" id="infusionTimeLabel">Time of infusion (Tinf (hours)): </label>
+            <input type="number" id="tinf" name="tinf" placeholder="Enter time of infusion in hours"><br>
+            <label for="peak" id="peakLabel">Measured Peak (μg/mL): </label>
+            <input type="number" id="peak" name="peak" placeholder="Enter measured peak in μg/mL"><br>
+            <label for="t1" id="timeAfterLabel">Time after infusion (T1 (hours)): </label>
+            <input type="number" id="t1" name="t1" placeholder="Enter time after infusion in hours"><br>
+            <label for="trough" id="troughLabel">Measured Trough (μg/mL): </label>
+            <input type="number" id="trough" name="trough" placeholder="Enter measured trough in μg/mL"><br>
+            <label for="t2" id="timeDifferenceLabel">Time Difference from Peak Measurement to Trough Collection (T2 (hours)): </label>
+            <input type="number" id="t2" name="t2" placeholder="Enter time difference in hours"><br>
+            <button onclick="calculate()" id="calculateButton">Calculate</button>
         </div>
         <div id="results">
-            <h2>Results AUC24</h2>
+            <h2 id="resultsHeader">Results AUC<sub>24</sub></h2>
             <p id="auc24"></p>
             <p id="warning" style="color:red; display:none;"></p>
         </div>
         <div id="predictionResults">
-            <h2>Prediction</h2>
-            <label for="newDose">New Dose (mg): </label>
-            <input type="number" id="newDose" name="newDose"><br>
-            <label for="newTau">New Tau (hours): </label>
-            <input type="number" id="newTau" name="newTau"><br>
-            <label for="newTinf">New Tinf (hours): </label>
-            <input type="number" id="newTinf" name="newTinf"><br>
-            <button onclick="predict()">Calculate Prediction</button><br>
+            <h2 id="predictionHeader">Prediction</h2>
+            <label for="newDose" id="newDoseLabel">New Dose (mg): </label>
+            <input type="number" id="newDose" name="newDose" placeholder="Enter new dose in mg"><br>
+            <label for="newTau" id="newIntervalLabel">New Tau (hours): </label>
+            <input type="number" id="newTau" name="newTau" placeholder="Enter new interval between doses in hours"><br>
+            <label for="newTinf" id="newInfusionTimeLabel">New Tinf (hours): </label>
+            <input type="number" id="newTinf" name="newTinf" placeholder="Enter new time of infusion in hours"><br>
+            <button onclick="predict()" id="calculatePredictionButton">Calculate Prediction</button><br>
             <p id="predictedAUC24"></p>
             <p id="predictedPeak"></p>
             <p id="predictedTrough"></p>
