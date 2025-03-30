@@ -1,57 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vancomycin AUC24 Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="title">Calculadora AUC24 Vancomicina</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#005b96">
 </head>
 <body>
-    <div class="container">
-        <h1>Vancomycin AUC24 Calculator</h1>
-        <p>The critical assumption of these calculations is that the patient has achieved Vancomycin steady-state</p>
-        <p><span style="color:red;">Target AUC24 is 400-600 μg/mL x hr</span></p>
-        <div id="inputs">
-            <h2>Inputs</h2>
-            <label for="dose">Each Dose (mg): </label>
-            <input type="number" id="dose" name="dose"><br>
-            <label for="tau">Tau (hours): </label>
-            <input type="number" id="tau" name="tau"><br>
-            <label for="tinf">Tinf (hours): </label>
-            <input type="number" id="tinf" name="tinf"><br>
-            <label for="peak">Measured Peak (μg/mL): </label>
-            <input type="number" id="peak" name="peak"><br>
-            <label for="t1">T1 (hours): </label>
-            <input type="number" id="t1" name="t1"><br>
-            <label for="trough">Measured Trough (μg/mL): </label>
-            <input type="number" id="trough" name="trough"><br>
-            <label for="t2">T2 (hours): </label>
-            <input type="number" id="t2" name="t2"><br>
-            <button onclick="calculate()">Calculate</button>
-        </div>
-        <div id="results">
-            <h2>Results AUC24</h2>
-            <p id="auc24"></p>
-            <p id="warning" style="color:red; display:none;"></p>
-        </div>
-        <div id="predictionResults">
-            <h2>Prediction</h2>
-            <label for="newDose">New Dose (mg): </label>
-            <input type="number" id="newDose" name="newDose"><br>
-            <label for="newTau">New Tau (hours): </label>
-            <input type="number" id="newTau" name="newTau"><br>
-            <label for="newTinf">New Tinf (hours): </label>
-            <input type="number" id="newTinf" name="newTinf"><br>
-            <button onclick="predict()">Calculate Prediction</button><br>
-            <p id="predictedAUC24"></p>
-            <p id="predictedPeak"></p>
-            <p id="predictedTrough"></p>
-        </div>
-        <button onclick="window.location.href = 'formulas.html'">Show Formulas</button>
+  <div id="header"></div>
+  <div class="container">
+    <h1 id="mainTitle"></h1>
+    <div class="card">
+      <p id="criticalAssumption"></p>
+      <p id="targetAUC24"><span style="color:red;"></span></p>
     </div>
-    <script src="script.js"></script>
-    <footer>
-        <p>&copy; Alexandre Trieste 2024 - todos os direitos reservados</p>
-    </footer>
+    <form class="card">
+      <h2 id="inputsHeader"></h2>
+      <label for="dose" id="eachDoseLabel"></label>
+      <span class="info-icon" id="tooltipDose">
+        <span class="info-tooltip" id="tooltipDoseText"></span>
+      </span>
+      <input type="number" id="dose" name="dose">
+      <label for="tau" id="intervalLabel"></label>
+      <span class="info-icon" id="tooltipTau">
+        <span class="info-tooltip" id="tooltipTauText"></span>
+      </span>
+      <input type="number" id="tau" name="tau">
+      <label for="tinf" id="infusionTimeLabel"></label>
+      <span class="info-icon" id="tooltipTinf">
+        <span class="info-tooltip" id="tooltipTinfText"></span>
+      </span>
+      <input type="number" id="tinf" name="tinf">
+      <label for="peak" id="peakLabel"></label>
+      <span class="info-icon" id="tooltipPeak">
+        <span class="info-tooltip" id="tooltipPeakText"></span>
+      </span>
+      <input type="number" id="peak" name="peak">
+      <label for="t1" id="timeAfterLabel"></label>
+      <span class="info-icon" id="tooltipT1">
+        <span class="info-tooltip" id="tooltipT1Text"></span>
+      </span>
+      <input type="number" id="t1" name="t1">
+      <label for="trough" id="troughLabel"></label>
+      <span class="info-icon" id="tooltipTrough">
+        <span class="info-tooltip" id="tooltipTroughText"></span>
+      </span>
+      <input type="number" id="trough" name="trough">
+      <label for="peakTime" id="peakTimeLabel"></label>
+      <span class="info-icon" id="tooltipPeakTime">
+        <span class="info-tooltip" id="tooltipPeakTimeText"></span>
+      </span>
+      <input type="datetime-local" id="peakTime" name="peakTime" onchange="updateT2Difference()">
+      <label for="troughTime" id="troughTimeLabel"></label>
+      <span class="info-icon" id="tooltipTroughTime">
+        <span class="info-tooltip" id="tooltipTroughTimeText"></span>
+      </span>
+      <input type="datetime-local" id="troughTime" name="troughTime" onchange="updateT2Difference()">
+      <label for="t2" id="timeDifferenceLabel"></label>
+      <span class="info-icon" id="tooltipT2">
+        <span class="info-tooltip" id="tooltipT2Text"></span>
+      </span>
+      <input type="number" id="t2" name="t2" disabled>
+      <button type="submit" class="btn" onclick="calculate(); return false;" id="calculateButton"></button>
+    </form>
+    <div class="card">
+      <h2 id="resultsHeader"></h2>
+      <p id="auc24"></p>
+      <p id="warning" style="color:red; display:none;"></p>
+    </div>
+    <div class="card">
+      <h2 id="predictionHeader"></h2>
+      <label for="newDose" id="newDoseLabel"></label>
+      <span class="info-icon" id="tooltipNewDose">
+        <span class="info-tooltip" id="tooltipNewDoseText"></span>
+      </span>
+      <input type="number" id="newDose" name="newDose">
+      <label for="newTau" id="newIntervalLabel"></label>
+      <span class="info-icon" id="tooltipNewTau">
+        <span class="info-tooltip" id="tooltipNewTauText"></span>
+      </span>
+      <input type="number" id="newTau" name="newTau">
+      <label for="newTinf" id="newInfusionTimeLabel"></label>
+      <span class="info-icon" id="tooltipNewTinf">
+        <span class="info-tooltip" id="tooltipNewTinfText"></span>
+      </span>
+      <input type="number" id="newTinf" name="newTinf">
+      <button class="btn" onclick="predict()" id="calculatePredictionButton"></button>
+      <p id="predictedAUC24"></p>
+      <p id="predictedPeak"></p>
+      <p id="predictedTrough"></p>
+    </div>
+    <div class="card">
+      <button class="btn" onclick="window.location.href = './formulas.html'" id="showFormulasButton"></button>
+    </div>
+    <div class="card">
+      <button class="btn" onclick="printReport()" id="printReportButton">Imprimir Relatório</button>
+    </div>
+  </div>
+  <div id="footer"></div>
+  <script>
+    fetch('./partials/header.html').then(r=>r.text()).then(html=>{document.getElementById('header').innerHTML=html})
+    fetch('./partials/footer.html').then(r=>r.text()).then(html=>{document.getElementById('footer').innerHTML=html})
+  </script>
+  <script type="module" src="./controller/main.js"></script>
+  <script type="module" src="./controller/script.js"></script>
+  <script type="module" src="./controller/datetime.js"></script>
+  <script type="module" src="./controller/print.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('Service Worker registrado!', reg))
+        .catch(err => console.error('Erro ao registrar Service Worker:', err));
+    }
+  </script>
 </body>
 </html>

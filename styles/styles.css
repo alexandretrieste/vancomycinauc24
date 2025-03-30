@@ -1,0 +1,161 @@
+h1 {
+  text-align: center;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: #f4f7fb;
+  margin: 0;
+  padding-top: 70px;
+  padding-bottom: 60px;
+}
+
+#topBar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  flex-wrap: wrap;
+  background-color: #0c5081;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#topBar button {
+  font-size: 14px;
+  padding: 8px 14px;
+  background: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.2); /* mais translúcido */
+  backdrop-filter: blur(16px);          /* blur mais forte */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background-clip: padding-box;
+  position: relative;
+  z-index: 1;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-top: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+footer {
+  padding: 4px 0;
+  font-size: 12px;
+  background-color: #0c5081;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('../assets/i.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+}
+
+.info-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 5px;
+  padding: 6px;
+  position: absolute;
+  z-index: 1;
+  width: 250px;
+  top: 20px;
+  left: 0;
+  font-size: 12px;
+}
+
+.info-icon:hover .info-tooltip {
+  visibility: visible;
+}
+
+/* -------------------- Alto Contraste ---------------------- */
+.high-contrast {
+  background-color: #000 !important;
+  color: #FFD700 !important;
+  font-size: 18px;
+}
+
+.high-contrast .card,
+.high-contrast input,
+.high-contrast #topBar,
+.high-contrast footer {
+  background-color: #000 !important;
+  color: #FFD700 !important;
+  border-color: #FFD700 !important;
+  font-size: 18px;
+}
+
+/* -------------------- Night Mode ---------------------- */
+.night-mode {
+  background-color: #222 !important;
+  color: #eee !important;
+}
+
+.night-mode #topBar {
+  background-color: #333 !important;
+}
+
+.night-mode .card {
+  background-color: #333 !important;
+  color: #eee !important;
+}
+
+.night-mode footer {
+  background-color: #111 !important;
+}

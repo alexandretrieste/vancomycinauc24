@@ -1,69 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vancomycin AUC24 Formulas</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="title">Calculadora AUC24 Vancomicina</title>
+  <link rel="stylesheet" href="./styles/styles.css">
+  <style>
+    .formula-title { font-weight: bold; margin-bottom: 6px; }
+    .card p { font-family: 'Segoe UI', Roboto, sans-serif; font-size: 15px; }
+    .math { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Vancomycin AUC24 Formulas and Explanations</h1>
-        
-        <h2>Step 1: Calculate ke</h2>
-        <p>ke = ln(Measured Peak / Measured Trough) / (T2 — T1)</p>
-        <p>Explanation: ke represents the elimination rate constant. It is calculated using the natural logarithm of the ratio of the measured peak to the measured trough concentration, divided by the time interval between the measurements.</p>
-        <p>Example: ke = 0.025 hr<sup>-1</sup></p>
+  <div id="header"></div>
+  <div class="container">
+    <h1 id="mainTitleFormulas"></h1>
 
-        <h2>Step 2: Calculate True Peak</h2>
-        <p>True Peak = Measured Peak / e<sup>(—ke)(T1—Tinf)</sup></p>
-        <p>Explanation: True Peak is the peak concentration adjusted for the start of infusion time. It is calculated using the measured peak concentration and the elimination rate constant.</p>
-        <p>Example: True Peak = 88.7 μg/mL</p>
-
-        <h2>Step 3: Calculate True Trough</h2>
-        <p>True Trough = (Measured Trough) * e<sup>(—ke)(Tau—T2)</sup></p>
-        <p>Explanation: True Trough is the trough concentration adjusted for the end of the dosing interval. It is calculated using the measured trough concentration, the elimination rate constant, and the dosing interval.</p>
-        <p>Example: True Trough = 26.8 μg/mL</p>
-
-        <h2>Step 4: Calculate AUCinf</h2>
-        <p>AUCinf = (True Trough + True Peak) / 2 * (Tinf)</p>
-        <p>Explanation: AUCinf represents the area under the concentration-time curve from time zero to infinity. It is calculated as the average of the true trough and true peak concentrations multiplied by the infusion time.</p>
-        <p>Example: AUCinf = 57.8 μg/mL x hr</p>
-
-        <h2>Step 5: Calculate AUCelim</h2>
-        <p>AUCelim = (True Peak — True Trough) / ke</p>
-        <p>Explanation: AUCelim represents the area under the concentration-time curve due to elimination. It is calculated as the difference between the true peak and true trough concentrations divided by the elimination rate constant.</p>
-        <p>Example: AUCelim = 2431.6 μg/mL x hr</p>
-
-        <h2>Step 6: Calculate AUC24</h2>
-        <p>AUC24 = [(AUCinf) + (AUCelim)] * (24 / Tau)</p>
-        <p>Explanation: AUC24 represents the area under the concentration-time curve over the dosing interval. It is calculated as the sum of AUCinf and AUCelim, adjusted for the dosing interval.</p>
-        <p>Example: AUC24 = 1245 μg/mL x hr</p>
-
-        <h2>Step 1: Calculate volume of distribution</h2>
-        <p>VD = (Dose) * (1 — e<sup>—ke • Tinf</sup>) / (Tinf • ke(True Peak — [True Trough • e<sup>—ke • Tinf</sup>]))</p>
-        <p>Explanation: VD represents the volume of distribution. It is calculated using the dose, elimination rate constant, start of infusion time, true peak concentration, and true trough concentration.</p>
-        <p>Example: VD = 23.66 L</p>
-
-        <h2>Step 2: Calculate vancomycin clearance (CL)</h2>
-        <p>CL = VD • ke</p>
-        <p>Explanation: CL represents the clearance of vancomycin. It is calculated as the product of volume of distribution and elimination rate constant.</p>
-        <p>Example: CL = 0.60 L/hr</p>
-
-        <h2>Step 3: Predict new peak concentration</h2>
-        <p>New Peak = (New Dose / (CL • New Tinf)) * (1 — e<sup>—ke • New Tinf</sup>) / (1 — e<sup>—ke • New Tau</sup>)</p>
-        <p>Explanation: New Peak represents the predicted peak concentration after a new dose administration. It is calculated using the new dose, vancomycin clearance, new infusion time, and new dosing interval.</p>
-        <p>Example: Predicted Peak = 44.4 μg/mL</p>
-
-        <h2>Step 4: Predict new trough concentration</h2>
-        <p>New Trough = New Peak • e<sup>—ke(New Tau — New Tinf)</sup></p>
-        <p>Explanation: New Trough represents the predicted trough concentration after a new dose administration. It is calculated using the predicted peak concentration, elimination rate constant, and new dosing interval.</p>
-        <p>Example: Predicted Trough = 13.4 μg/mL</p>
-
-        <button onclick="window.location.href = 'index.html'">Return</button>
+    <div class="card">
+      <div class="formula-title" id="formula1Title"></div>
+      <p id="formula1Desc" class="math">ke = ln(Pico / Vale) / (T2 – T1)</p>
+      <span class="info-icon" id="tooltipFormula1">
+        <span class="info-tooltip" id="tooltipFormula1Text"></span>
+      </span>
     </div>
-    <footer>
-        <p>&copy; Alexandre Trieste 2024 - todos os direitos reservados</p>
-    </footer>
+
+    <div class="card">
+      <div class="formula-title" id="formula2Title"></div>
+      <p id="formula2Desc" class="math">Pico Real = Pico Medido / e<sup>–ke·(T1 – Tinf)</sup></p>
+      <span class="info-icon" id="tooltipFormula2">
+        <span class="info-tooltip" id="tooltipFormula2Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula3Title"></div>
+      <p id="formula3Desc" class="math">Vale Real = Vale Medido · e<sup>–ke·(Tau – T2)</sup></p>
+      <span class="info-icon" id="tooltipFormula3">
+        <span class="info-tooltip" id="tooltipFormula3Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula4Title"></div>
+      <p id="formula4Desc" class="math">AUC<sub>inf</sub> = (Pico Real + Vale Real) / 2 · Tinf</p>
+      <span class="info-icon" id="tooltipFormula4">
+        <span class="info-tooltip" id="tooltipFormula4Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula5Title"></div>
+      <p id="formula5Desc" class="math">AUC<sub>elim</sub> = (Pico Real – Vale Real) / ke</p>
+      <span class="info-icon" id="tooltipFormula5">
+        <span class="info-tooltip" id="tooltipFormula5Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula6Title"></div>
+      <p id="formula6Desc" class="math">AUC<sub>24</sub> = (AUC<sub>inf</sub> + AUC<sub>elim</sub>) · (24 / Tau)</p>
+      <span class="info-icon" id="tooltipFormula6">
+        <span class="info-tooltip" id="tooltipFormula6Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula7Title"></div>
+      <p id="formula7Desc" class="math">VD = Dose · (1 – e<sup>–ke·Tinf</sup>) / (Tinf · ke · (Pico Real – Vale Real · e<sup>–ke·Tinf</sup>))</p>
+      <span class="info-icon" id="tooltipFormula7">
+        <span class="info-tooltip" id="tooltipFormula7Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula8Title"></div>
+      <p id="formula8Desc" class="math">CL = VD · ke</p>
+      <span class="info-icon" id="tooltipFormula8">
+        <span class="info-tooltip" id="tooltipFormula8Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula9Title"></div>
+      <p id="formula9Desc" class="math">Pico Previsto = (Nova Dose / (CL · Novo Tinf)) · (1 – e<sup>–ke·Novo Tinf</sup>) / (1 – e<sup>–ke·Novo Tau</sup>)</p>
+      <span class="info-icon" id="tooltipFormula9">
+        <span class="info-tooltip" id="tooltipFormula9Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="formula-title" id="formula10Title"></div>
+      <p id="formula10Desc" class="math">Vale Previsto = Pico Previsto · e<sup>–ke·(Novo Tau – Novo Tinf)</sup></p>
+      <span class="info-icon" id="tooltipFormula10">
+        <span class="info-tooltip" id="tooltipFormula10Text"></span>
+      </span>
+    </div>
+
+    <div class="card">
+      <button class="btn" onclick="window.location.href = './index.html'" id="backButton"></button>
+    </div>
+  </div>
+  <div id="footer"></div>
+  <script>
+    fetch('./partials/header.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header').innerHTML = html;
+      });
+    fetch('./partials/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer').innerHTML = html;
+      });
+  </script>
+  <script type="module" src="./controller/main.js"></script>
 </body>
 </html>
