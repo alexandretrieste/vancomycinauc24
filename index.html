@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="title">Calculadora AUC24 Vancomicina</title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/styles.css?v=2.0.0"">
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#005b96">
 </head>
@@ -105,13 +105,13 @@
     fetch('./partials/header.html').then(r=>r.text()).then(html=>{document.getElementById('header').innerHTML=html})
     fetch('./partials/footer.html').then(r=>r.text()).then(html=>{document.getElementById('footer').innerHTML=html})
   </script>
-  <script type="module" src="./controller/main.js"></script>
-  <script type="module" src="./controller/script.js"></script>
-  <script type="module" src="./controller/datetime.js"></script>
-  <script type="module" src="./controller/print.js"></script>
+  <script type="module" src="./controller/main.js?v=2.0.0"></script>
+  <script type="module" src="./controller/script.js?v=2.0.0"></script>
+  <script type="module" src="./controller/datetime.js?v=2.0.0"></script>
+  <script type="module" src="./controller/print.js?v=2.0.0"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
+      navigator.serviceWorker.register('./service-worker.js?v=2.0.0"')
         .then(reg => console.log('Service Worker registrado!', reg))
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     }
